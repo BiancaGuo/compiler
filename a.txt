@@ -1,0 +1,9 @@
+class Main {
+	int ccc;		//VariableDef
+	int main(int a, int b)
+	{
+		sb(a, 10)		//Call;
+		a = "aaa";
+		return (a+16)Expr '+' Expr:97 + 16*c;
+	}		//FunctionDef
+}		//ClassDef;
