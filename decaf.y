@@ -218,6 +218,7 @@ int main(void)
 	yyparse();
 	createTableFromASTtree(header);
 	updateTable(header);
+	Check(header);
 	test(header);
 	return 0;
 }

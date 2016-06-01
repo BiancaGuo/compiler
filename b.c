@@ -10,6 +10,7 @@ class s extends Main {
 
 class Main {
 	int ccc;
+	int ccc;
 	int main(int a, int b)
 	{
 		sb(a, 10);

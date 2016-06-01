@@ -1,6 +1,4 @@
-#include "../include/SymbolTable.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "../common.h"
 
 struct FirstLetter *createSymbolTable()
 {
@@ -24,7 +22,7 @@ int insertSymbol(struct FirstLetter *header, char *newName, Type newType, DataTy
 	if (header == NULL) {
 		return 0;
 	}
-	
+	if (findSymbol(header, newName) != NULL) return 0;
 	temp = (struct SymbolNode *)malloc(sizeof(struct SymbolNode));
 	temp->name = (char *)malloc(sizeof(strlen(newName))+1);
 	strcpy(temp->name, newName);

@@ -1,7 +1,4 @@
-#include "../include/SymbolTree.h"
-#include "../include/ASTtree.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "../common.h"
 
 struct SymbolTableNode *root;
 struct SymbolTableNode *list;	//用于清空tableTree

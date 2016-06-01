@@ -1,4 +1,4 @@
-#include "../include/ClassTable.h"
+#include "../common.h"
 
 ClassTable *classTableHeader = NULL;
 

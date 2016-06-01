@@ -1,8 +1,7 @@
 #ifndef _SYMBOLTREE_H
 #define _SYMBOLTREE_H
 
-#include "SymbolTable.h"
-#include "ASTtree.h"
+#include "../common.h"
 
 typedef struct SymbolTableNode{
 	struct FirstLetter *header;

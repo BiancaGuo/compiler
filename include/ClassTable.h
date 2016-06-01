@@ -1,8 +1,7 @@
 #ifndef _CLASSTABLE_H
 #define _CLASSTABLE_H
 
-#include "SymbolTree.h"
-#include <stdlib.h>
+#include "../common.h"
 
 typedef struct ClassTable {
 	char *name;

@@ -1,8 +1,6 @@
-#include "../include/ASTtree.h"
-#include "../include/ClassTable.h"
-#include <stdarg.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "../common.h"
+
+void error(char *log);
 
 struct Node *mkNode(char *name, int num, ...)
 {
@@ -162,7 +160,8 @@ void createTableFromASTtree(struct Node *header)
 		header->node[0]->symbolTableNode = header->symbolTableNode;
 	}
 	else if (strcmp(header->name, "class-extends") == 0){
-		insertSymbol(header->symbolTableNode->header, header->node[0]->name, Type_class, DataType_noDef, 0);
+		if (insertSymbol(header->symbolTableNode->header, header->node[0]->name, Type_class, DataType_noDef, 0) == 0)
+			error("identifier defined mutiple or header is null ");
 		header->node[0]->symbolTableNode = header->symbolTableNode;
 		header->node[1]->symbolTableNode = header->symbolTableNode;
 		header->node[2]->symbolTableNode = createTableNode(header->symbolTableNode);
@@ -170,19 +169,22 @@ void createTableFromASTtree(struct Node *header)
 
 	}
 	else if (strcmp(header->name, "class") == 0){	//
-		insertSymbol(header->symbolTableNode->header, header->node[0]->name, Type_class, DataType_noDef, 0);
+		if (insertSymbol(header->symbolTableNode->header, header->node[0]->name, Type_class, DataType_noDef, 0) == 0)
+			error("identifier defined mutiple or header is null ");
 		header->node[0]->symbolTableNode = header->symbolTableNode;
 		header->node[1]->symbolTableNode = createTableNode(header->symbolTableNode);
 		insertToClassTable(header->node[0]->name, header->node[1]->symbolTableNode);
 	}
 	else if (strcmp(header->name, "Static-function") == 0){	//
-		insertSymbol(header->symbolTableNode->header, header->node[1]->name, Type_staticFunction, DataType_noDef, 0);
+		if (insertSymbol(header->symbolTableNode->header, header->node[1]->name, Type_staticFunction, DataType_noDef, 0) == 0)
+			error("identifier defined mutiple or header is null ");
 		header->node[0]->symbolTableNode = header->symbolTableNode;
 		header->node[1]->symbolTableNode = header->symbolTableNode;
 		header->node[2]->symbolTableNode = header->node[3]->symbolTableNode = createTableNode(header->symbolTableNode);
 	}
 	else if (strcmp(header->name, "function") == 0){
-		insertSymbol(header->symbolTableNode->header, header->node[1]->name, Type_function, DataType_noDef, 0);
+		if (insertSymbol(header->symbolTableNode->header, header->node[1]->name, Type_function, DataType_noDef, 0) == 0)
+			error("identifier defined mutiple or header is null ");
 		header->node[0]->symbolTableNode = header->symbolTableNode;
 		header->node[1]->symbolTableNode = header->symbolTableNode;
 		header->node[2]->symbolTableNode = header->node[3]->symbolTableNode = createTableNode(header->symbolTableNode);
@@ -192,7 +194,8 @@ void createTableFromASTtree(struct Node *header)
 		else if (header->node[0]->nodeType == type_string_Leaf) dataType_temp = DataType_string;
 		else if (header->node[0]->nodeType == type_bool_Leaf) dataType_temp = DataType_bool;
 		else if (header->node[0]->nodeType == type_void_Leaf) dataType_temp = DataType_void;
-		insertSymbol(header->symbolTableNode->header, header->node[1]->name, Type_variable, dataType_temp, 0);
+		if (insertSymbol(header->symbolTableNode->header, header->node[1]->name, Type_variable, dataType_temp, 0) == 0)
+			error("identifier defined mutiple or header is null ");
 		header->node[0]->symbolTableNode = header->symbolTableNode;
 		header->node[1]->symbolTableNode = header->symbolTableNode;
 	}
@@ -222,4 +225,18 @@ void updateTable(struct Node *header)
 	for (i = 0; i < header->num; i++) {
 		updateTable(header->node[i]);
 	}
+}
+
+void Check(struct Node *header)
+{
+	SymbolCheck(header);
+	TypeCheck(header);
+}
+void TypeCheck(struct Node *header)
+{
+
+}
+void SymbolCheck(struct Node *header)
+{
+
 }
