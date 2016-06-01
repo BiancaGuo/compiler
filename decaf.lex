@@ -1,5 +1,10 @@
 %{
 	#include "decaf.tab.h"
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include "include/ASTtree.h"
+	#include "include/SymbolTable.h"
+	#include "include/SymbolTree.h"
 	void yyerror(char *);
 	char *str;
 %}
@@ -12,6 +17,11 @@ operater \+|\-|\*|\/|%|<|>|!|=
 separator ;|,|\.|\[|\]|\(|\)|\{|\}
 annotation \/\/([^\n]*)\n|\/\*([^\/\*]*)\*\/
 %%
+%union {
+int intValue;
+char *stringValue;
+struct Node *node; /* 结点地址 */
+};
 bool {ECHO; return MYBOOL;}
 break {ECHO; return MYBREAK;}
 class {ECHO; return MYCLASS;}
@@ -41,11 +51,11 @@ false {ECHO; return MYFALSE;}
 \&\& {ECHO; return MYAND;}
 \|\| {ECHO; return MYOR;}
 {annotation} {}
-{string} {yylval = *yytext; ECHO; return MYSTRING2;}
-{identifier} {yylval = *yytext; ECHO; return MYIDENTIFIER;}
+{string} {yylval.stringValue = (char *)malloc(sizeof(yytext)+1); strcpy(yylval.stringValue, yytext); ECHO; return MYSTRING2;}
+{identifier} {yylval.stringValue = (char *)malloc(sizeof(yytext)+1); strcpy(yylval.stringValue, yytext); ECHO; return MYIDENTIFIER;}
 {space} {ECHO;}
-{integer} {yylval = atoi(yytext); return MYINTEGER;}
-{dex} {yylval = strtol(yytext, &str, 16); return MYDEX;}
+{integer} {ECHO; yylval.intValue = atoi(yytext); return MYINTEGER;}
+{dex} {ECHO; yylval.intValue = strtol(yytext, &str, 16); return MYDEX;}
 {operater} {ECHO; return *yytext;}
 {separator} {ECHO; return *yytext;}
 %%
@@ -54,4 +64,3 @@ int yywrap()
 {
 	return 1;
 }
-

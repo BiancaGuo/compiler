@@ -1,11 +1,12 @@
-#include "SymbolTable.h"
+#include "../include/SymbolTable.h"
 #include <stdlib.h>
+#include <stdio.h>
 
-FirstLetter *createSymbolTable()
+struct FirstLetter *createSymbolTable()
 {
 	int i;
-	FirstLetter *header;
-	header = (FirstLetter *)malloc(sizeof(FirstLetter) * (26*2+1)); //大写小写和_
+	struct FirstLetter *header;
+	header = (struct FirstLetter *)malloc(sizeof(struct FirstLetter) * (26*2+1)); //大写小写和_
 	for(i = 0; i < 26; i++)
 		header[i].letter = 'a'+i;
 	for(;i < 52; i++)
@@ -17,13 +18,14 @@ FirstLetter *createSymbolTable()
 }
 
 //插入符号信息
-int insertSymbol(FirstLetter *header, char *newName, Type newType, DataType newDataType, unsigned int newAddr)
+int insertSymbol(struct FirstLetter *header, char *newName, Type newType, DataType newDataType, unsigned int newAddr)
 {
-	SymbolNode *temp;
+	struct SymbolNode *temp;
 	if (header == NULL) {
 		return 0;
 	}
-	temp = (SymbolNode *)malloc(sizeof(SymbolNode));
+	
+	temp = (struct SymbolNode *)malloc(sizeof(struct SymbolNode));
 	temp->name = (char *)malloc(sizeof(strlen(newName))+1);
 	strcpy(temp->name, newName);
 	temp->type = newType;
@@ -43,10 +45,10 @@ int insertSymbol(FirstLetter *header, char *newName, Type newType, DataType newD
 }
 
 //如果查到返回符号信息，否则返回空
-SymbolNode *findSymbol(FirstLetter *header, char *symbolName)
+struct SymbolNode *findSymbol(struct FirstLetter *header, char *symbolName)
 {
 	int index;
-	SymbolNode *temp;
+	struct SymbolNode *temp;
 	if (header == NULL) return NULL;
 	if (symbolName[0] >= 'a' && symbolName[0] <= 'z')
 		index = symbolName[0] - 'a';
@@ -62,10 +64,10 @@ SymbolNode *findSymbol(FirstLetter *header, char *symbolName)
 	return NULL;
 }
 
-void clearSymbolTable(FirstLetter **header)
+void clearSymbolTable(struct FirstLetter **header)
 {
 	int i;
-	SymbolNode *temp, *pretemp;
+	struct SymbolNode *temp, *pretemp;
 	if (header == NULL) return ;
 	if (*header == NULL) return ;
 	for (i = 0; i < 53; i++) {

@@ -1,0 +1,1 @@
+gcc -I F:\mycode\c\compiler\include test.c ..\src\*.c -o test

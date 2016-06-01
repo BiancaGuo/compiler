@@ -1,16 +1,16 @@
-#include "ASTtree.h"
+#include "../include/ASTtree.h"
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-Node *mkNode(char *name, int num, ...)
+struct Node *mkNode(char *name, int num, ...)
 {
 	va_list valist;
 	int i, nodeSize;
-	Node *newNode;
-	nodeSize = sizeof(Node) + (num-1) * sizeof(Node *);
-	printf("nodeSize = %d\n", nodeSize);
-	if ((newNode = (Node *)malloc(nodeSize)) == NULL)
+	struct Node *newNode;
+	nodeSize = sizeof(struct Node) + (num-1) * sizeof(struct Node *);
+	//printf("nodeSize = %d\n", nodeSize);
+	if ((newNode = (struct Node *)malloc(nodeSize)) == NULL)
 		printf("out of memory");
 	newNode->nodeType = no_Leaf;
 	newNode->name = (char *)malloc(strlen(name)+1);
@@ -19,50 +19,78 @@ Node *mkNode(char *name, int num, ...)
 
 	va_start(valist, num);
 	for (i = 0; i < num; i++)
-		newNode->node[i] = va_arg(valist, Node *);
+		newNode->node[i] = va_arg(valist, struct Node *);
 	va_end(valist);
 	return newNode;
 }
 
-Node *mkLeaf_int(int value)
+struct Node *mkLeaf_int(int value)
 {
 	int nodeSize;
-	Node *newNode;
-	nodeSize = sizeof(Node);
-	if ((newNode = (Node *)malloc(nodeSize)) == NULL)
+	struct Node *newNode;
+	nodeSize = sizeof(struct Node);
+	if ((newNode = (struct Node *)malloc(nodeSize)) == NULL)
 		printf("out of memory");
 	newNode->nodeType = int_Leaf;
 	newNode->intValue = value;
+	newNode->num = 0;
 	return newNode;
 }
 
-Node *mkLeaf_string(char *value)
+struct Node *mkLeaf_logic(int value)
 {
 	int nodeSize;
-	Node *newNode;
-	nodeSize = sizeof(Node);
-	if ((newNode = (Node *)malloc(nodeSize)) == NULL)
+	struct Node *newNode;
+	nodeSize = sizeof(struct Node);
+	if ((newNode = (struct Node *)malloc(nodeSize)) == NULL)
 		printf("out of memory");
-	newNode->nodeType = int_Leaf;
+	newNode->nodeType = logic_Leaf;
+	newNode->logicValue = value;
+	newNode->num = 0;
+	return newNode;
+}
+
+struct Node *mkLeaf_string(char *value)
+{
+	int nodeSize;
+	struct Node *newNode;
+	nodeSize = sizeof(struct Node);
+	if ((newNode = (struct Node *)malloc(nodeSize)) == NULL)
+		printf("out of memory");
+	newNode->nodeType = string_Leaf;
 	newNode->stringValue = (char *)malloc(strlen(value)+1);
 	strcpy(newNode->stringValue, value);
+	newNode->num = 0;
 	return newNode;
 }
 
-Node *mkLeaf_name(char *value)
+struct Node *mkLeaf_name(char *value)
 {
 	int nodeSize;
-	Node *newNode;
-	nodeSize = sizeof(Node);
-	if ((newNode = (Node *)malloc(nodeSize)) == NULL)
+	struct Node *newNode;
+	nodeSize = sizeof(struct Node);
+	if ((newNode = (struct Node *)malloc(nodeSize)) == NULL)
 		printf("out of memory");
-	newNode->nodeType = int_Leaf;
+	newNode->nodeType = name_Leaf;
 	newNode->name = (char *)malloc(strlen(value)+1);
 	strcpy(newNode->name, value);
+	newNode->num = 0;
 	return newNode;
 }
 
-void printAST(Node *head)
+struct Node *mkLeaf_other(NodeType type)
+{
+	int nodeSize;
+	struct Node *newNode;
+	nodeSize = sizeof(struct Node);
+	if ((newNode = (struct Node *)malloc(nodeSize)) == NULL)
+		printf("out of memory");
+	newNode->nodeType = type;
+	newNode->num = 0;
+	return newNode;
+}
+
+void printAST(struct Node *head)
 {
 	int i;
 	switch(head->nodeType)
@@ -78,8 +106,104 @@ void printAST(Node *head)
 		case string_Leaf:
 		printf(" %s ", head->stringValue);
 		break;
+		case name_Leaf:
+		printf(" %s ", head->name);
+		break;
 		case variable_Leaf:
 		printf(" %s ", head->name);
 		break;
+		case logic_Leaf:
+		printf(" %d ", head->logicValue);
+		break;
+		case NULL_Leaf:
+		printf(" null ");
+		break;
+		case Blank_Leaf:
+		printf(" ");
+		break;
+		case this_Leaf:
+		printf(" this ");
+		break;
+		case break_Leaf:
+		printf(" break ");
+		break;
+		case return_Leaf:
+		printf(" return ");
+		break;
+		case type_int_Leaf:
+		printf(" int ");
+		break;
+		case type_bool_Leaf:
+		printf(" bool ");
+		break;
+		case type_string_Leaf:
+		printf(" string ");
+		break;
+		case type_void_Leaf:
+		printf(" void ");
+		break;
+		case syscall_readint:
+		printf(" readint() ");
+		break;
+		case syscall_readline:
+		printf(" readline() ");
+		break;
+	}
+}
+
+void createTableFromASTtree(struct Node *header)
+{
+	int i;
+	DataType dataType_temp;
+	if (header->nodeType != no_Leaf) {return ;}
+	if (strcmp(header->name, "Program") == 0) {
+		header->symbolTableNode = createRoot();
+		header->node[0]->symbolTableNode = header->symbolTableNode;
+	}
+	else if (strcmp(header->name, "class-extends") == 0){
+		insertSymbol(header->symbolTableNode->header, header->node[0]->name, Type_class, DataType_noDef, 0);
+		header->node[0]->symbolTableNode = header->symbolTableNode;
+		header->node[1]->symbolTableNode = header->symbolTableNode;
+		header->node[2]->symbolTableNode = createTableNode(header->symbolTableNode);
+
+	}
+	else if (strcmp(header->name, "class") == 0){	//
+		insertSymbol(header->symbolTableNode->header, header->node[0]->name, Type_class, DataType_noDef, 0);
+		header->node[0]->symbolTableNode = header->symbolTableNode;
+		header->node[1]->symbolTableNode = createTableNode(header->symbolTableNode);
+	}
+	else if (strcmp(header->name, "Static-function") == 0){	//
+		insertSymbol(header->symbolTableNode->header, header->node[1]->name, Type_staticFunction, DataType_noDef, 0);
+		header->node[0]->symbolTableNode = header->symbolTableNode;
+		header->node[1]->symbolTableNode = header->symbolTableNode;
+		header->node[2]->symbolTableNode = header->node[3]->symbolTableNode = createTableNode(header->symbolTableNode);
+	}
+	else if (strcmp(header->name, "function") == 0){
+		insertSymbol(header->symbolTableNode->header, header->node[1]->name, Type_function, DataType_noDef, 0);
+		header->node[0]->symbolTableNode = header->symbolTableNode;
+		header->node[1]->symbolTableNode = header->symbolTableNode;
+		header->node[2]->symbolTableNode = header->node[3]->symbolTableNode = createTableNode(header->symbolTableNode);
+	}
+	else if (strcmp(header->name, "Variable") == 0){	//
+		if (header->node[0]->nodeType == type_int_Leaf) dataType_temp = DataType_int;
+		else if (header->node[0]->nodeType == type_string_Leaf) dataType_temp = DataType_string;
+		else if (header->node[0]->nodeType == type_bool_Leaf) dataType_temp = DataType_bool;
+		else if (header->node[0]->nodeType == type_void_Leaf) dataType_temp = DataType_void;
+		insertSymbol(header->symbolTableNode->header, header->node[1]->name, Type_variable, dataType_temp, 0);
+		header->node[0]->symbolTableNode = header->symbolTableNode;
+		header->node[1]->symbolTableNode = header->symbolTableNode;
+	}
+	else if (strcmp(header->name, "StmtBlock") == 0){	//
+		header->node[0]->symbolTableNode = createTableNode(header->symbolTableNode);
+	}
+	// else if (strcmp(header->name, "ReturnStmt") == 0){	//
+	// 	printTable(header->symbolTableNode);
+	// }
+	else {
+		for (i = 0; i < header->num; i++)
+			header->node[i]->symbolTableNode = header->symbolTableNode;
+	}
+	for (i = 0; i < header->num; i++) {
+		createTableFromASTtree(header->node[i]);
 	}
 }
