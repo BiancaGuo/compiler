@@ -30,6 +30,7 @@ void TypeCheck(struct Node *header);
 void SymbolCheck(struct Node *header);
 void createTableFromASTtree(struct Node *header);
 void updateTable(struct Node *header);
+void genTAC(struct Node *header);
 void printAST(struct Node *head);
 extern unsigned int strlen(char *s);
 extern char *strcpy(char* dest, const char *src);

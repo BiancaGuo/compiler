@@ -6,6 +6,7 @@
 #include "include/SymbolTable.h"
 #include "include/ASTtree.h"
 #include "include/ClassTable.h"
+#include "include/ThreeAddCode.h"
 
 #include <stdlib.h>
 #include <stdio.h>

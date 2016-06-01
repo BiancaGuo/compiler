@@ -219,6 +219,7 @@ int main(void)
 	createTableFromASTtree(header);
 	updateTable(header);
 	Check(header);
+	genTAC(header);
 	test(header);
 	return 0;
 }

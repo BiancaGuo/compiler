@@ -166,7 +166,6 @@ void createTableFromASTtree(struct Node *header)
 		header->node[1]->symbolTableNode = header->symbolTableNode;
 		header->node[2]->symbolTableNode = createTableNode(header->symbolTableNode);
 		insertToClassTable(header->node[0]->name, header->node[2]->symbolTableNode);
-
 	}
 	else if (strcmp(header->name, "class") == 0){	//
 		if (insertSymbol(header->symbolTableNode->header, header->node[0]->name, Type_class, DataType_noDef, 0) == 0)
@@ -239,4 +238,9 @@ void TypeCheck(struct Node *header)
 void SymbolCheck(struct Node *header)
 {
 
+}
+
+void genTAC(struct Node *header)
+{
+	
 }
