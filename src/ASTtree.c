@@ -1,4 +1,5 @@
 #include "../include/ASTtree.h"
+#include "../include/ClassTable.h"
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -165,12 +166,14 @@ void createTableFromASTtree(struct Node *header)
 		header->node[0]->symbolTableNode = header->symbolTableNode;
 		header->node[1]->symbolTableNode = header->symbolTableNode;
 		header->node[2]->symbolTableNode = createTableNode(header->symbolTableNode);
+		insertToClassTable(header->node[0]->name, header->node[2]->symbolTableNode);
 
 	}
 	else if (strcmp(header->name, "class") == 0){	//
 		insertSymbol(header->symbolTableNode->header, header->node[0]->name, Type_class, DataType_noDef, 0);
 		header->node[0]->symbolTableNode = header->symbolTableNode;
 		header->node[1]->symbolTableNode = createTableNode(header->symbolTableNode);
+		insertToClassTable(header->node[0]->name, header->node[1]->symbolTableNode);
 	}
 	else if (strcmp(header->name, "Static-function") == 0){	//
 		insertSymbol(header->symbolTableNode->header, header->node[1]->name, Type_staticFunction, DataType_noDef, 0);
@@ -205,5 +208,18 @@ void createTableFromASTtree(struct Node *header)
 	}
 	for (i = 0; i < header->num; i++) {
 		createTableFromASTtree(header->node[i]);
+	}
+}
+
+void updateTable(struct Node *header)
+{
+	//继承的处理
+	int i;
+	if (header->num == 0)return ;
+	if (strcmp(header->name, "class-extends") == 0){
+		header->node[2]->symbolTableNode->parents = findInClassTable(header->node[1]->name);
+	}
+	for (i = 0; i < header->num; i++) {
+		updateTable(header->node[i]);
 	}
 }

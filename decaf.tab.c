@@ -77,11 +77,12 @@
 	#include "include/SymbolTree.h"
 	int yylex(void);
 	void yyerror(char *);
+	void test(struct Node *header);
 	struct Node *header;
 
 
 /* Line 189 of yacc.c  */
-#line 85 "decaf.tab.c"
+#line 86 "decaf.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -151,7 +152,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 12 "decaf.y"
+#line 13 "decaf.y"
 
 int intValue;
 char *stringValue;
@@ -160,7 +161,7 @@ struct Node *node;
 
 
 /* Line 214 of yacc.c  */
-#line 164 "decaf.tab.c"
+#line 165 "decaf.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -172,7 +173,7 @@ struct Node *node;
 
 
 /* Line 264 of yacc.c  */
-#line 176 "decaf.tab.c"
+#line 177 "decaf.tab.c"
 
 #ifdef short
 # undef short
@@ -496,16 +497,16 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    57,    57,    61,    62,    66,    67,    71,    72,    73,
-      74,    78,    79,    83,    87,    91,    94,    95,    96,    97,
-      98,    99,   103,   104,   105,   109,   110,   113,   114,   117,
-     118,   119,   120,   121,   122,   123,   124,   125,   128,   129,
-     132,   133,   134,   137,   138,   141,   142,   143,   146,   149,
-     152,   153,   156,   157,   160,   163,   166,   167,   168,   171,
-     174,   175,   176,   177,   178,   179,   180,   181,   182,   183,
-     184,   185,   186,   187,   188,   189,   190,   191,   192,   193,
-     194,   195,   196,   197,   198,   201,   202,   203,   204,   205,
-     206
+       0,    58,    58,    62,    63,    67,    68,    72,    73,    74,
+      75,    79,    80,    84,    88,    92,    95,    96,    97,    98,
+      99,   100,   104,   105,   106,   110,   111,   114,   115,   118,
+     119,   120,   121,   122,   123,   124,   125,   126,   129,   130,
+     133,   134,   135,   138,   139,   142,   143,   144,   147,   150,
+     153,   154,   157,   158,   161,   164,   167,   168,   169,   172,
+     175,   176,   177,   178,   179,   180,   181,   182,   183,   184,
+     185,   186,   187,   188,   189,   190,   191,   192,   193,   194,
+     195,   196,   197,   198,   199,   202,   203,   204,   205,   206,
+     207
 };
 #endif
 
@@ -1601,630 +1602,630 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 57 "decaf.y"
+#line 58 "decaf.y"
     {(yyval.node) = header = mkNode("Program", 1, (yyvsp[(1) - (1)].node)); ;}
     break;
 
   case 3:
 
 /* Line 1455 of yacc.c  */
-#line 61 "decaf.y"
+#line 62 "decaf.y"
     {(yyval.node) = mkNode("ClassDef", 1, (yyvsp[(1) - (2)].node));;}
     break;
 
   case 4:
 
 /* Line 1455 of yacc.c  */
-#line 62 "decaf.y"
+#line 63 "decaf.y"
     {(yyval.node) = mkNode("ClassDef", 2, (yyvsp[(1) - (3)].node), (yyvsp[(2) - (3)].node));;}
     break;
 
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 66 "decaf.y"
+#line 67 "decaf.y"
     {(yyval.node) = mkNode("class-extends", 3, (yyvsp[(2) - (7)].node), (yyvsp[(4) - (7)].node), (yyvsp[(6) - (7)].node));;}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 67 "decaf.y"
+#line 68 "decaf.y"
     {(yyval.node) = mkNode("class", 2, (yyvsp[(2) - (5)].node), (yyvsp[(4) - (5)].node));;}
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 71 "decaf.y"
+#line 72 "decaf.y"
     {(yyval.node) = mkNode("Field", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 72 "decaf.y"
+#line 73 "decaf.y"
     {(yyval.node) = mkNode("Field", 1, (yyvsp[(1) - (1)].node));;;}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 73 "decaf.y"
+#line 74 "decaf.y"
     {(yyval.node) = mkNode("Field", 2, (yyvsp[(1) - (2)].node), (yyvsp[(2) - (2)].node));;}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 74 "decaf.y"
+#line 75 "decaf.y"
     {(yyval.node) = mkNode("Field", 2, (yyvsp[(1) - (2)].node), (yyvsp[(2) - (2)].node));;}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 78 "decaf.y"
+#line 79 "decaf.y"
     {(yyval.node) = mkNode("Static-function", 4, (yyvsp[(2) - (7)].node), (yyvsp[(3) - (7)].node), (yyvsp[(5) - (7)].node), (yyvsp[(7) - (7)].node));;}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 79 "decaf.y"
+#line 80 "decaf.y"
     {(yyval.node) = mkNode("function", 4, (yyvsp[(1) - (6)].node), (yyvsp[(2) - (6)].node), (yyvsp[(4) - (6)].node), (yyvsp[(6) - (6)].node));;}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 83 "decaf.y"
+#line 84 "decaf.y"
     {(yyval.node) = mkNode("VariableDef", 1, (yyvsp[(1) - (2)].node));;}
     break;
 
   case 14:
 
 /* Line 1455 of yacc.c  */
-#line 87 "decaf.y"
+#line 88 "decaf.y"
     {(yyval.node) = mkNode("Variable", 2, (yyvsp[(1) - (2)].node), (yyvsp[(2) - (2)].node));;}
     break;
 
   case 15:
 
 /* Line 1455 of yacc.c  */
-#line 91 "decaf.y"
+#line 92 "decaf.y"
     {(yyval.node) = mkLeaf_name(yylval.stringValue);;}
     break;
 
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 94 "decaf.y"
+#line 95 "decaf.y"
     {(yyval.node) = mkLeaf_other(type_int_Leaf);;}
     break;
 
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 95 "decaf.y"
+#line 96 "decaf.y"
     {(yyval.node) = mkLeaf_other(type_bool_Leaf);;}
     break;
 
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 96 "decaf.y"
+#line 97 "decaf.y"
     {(yyval.node) = mkLeaf_other(type_string_Leaf);;}
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 97 "decaf.y"
+#line 98 "decaf.y"
     {(yyval.node) = mkLeaf_other(type_void_Leaf);;}
     break;
 
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 98 "decaf.y"
+#line 99 "decaf.y"
     {(yyval.node) = mkNode("Type_class", 1, (yyvsp[(2) - (2)].node));;}
     break;
 
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 99 "decaf.y"
+#line 100 "decaf.y"
     {(yyval.node) = mkNode("Type_array", 1, (yyvsp[(1) - (3)].node));;}
     break;
 
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 103 "decaf.y"
+#line 104 "decaf.y"
     {(yyval.node) = mkNode("Formal", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 23:
 
 /* Line 1455 of yacc.c  */
-#line 104 "decaf.y"
+#line 105 "decaf.y"
     {(yyval.node) = mkNode("Formal", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 24:
 
 /* Line 1455 of yacc.c  */
-#line 105 "decaf.y"
+#line 106 "decaf.y"
     {(yyval.node) = mkLeaf_other(Blank_Leaf);;}
     break;
 
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 109 "decaf.y"
+#line 110 "decaf.y"
     {(yyval.node) = mkNode("StmtBlock", 1, (yyvsp[(2) - (3)].node));;}
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 110 "decaf.y"
+#line 111 "decaf.y"
     {(yyval.node) = mkLeaf_other(Blank_Leaf);;}
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 113 "decaf.y"
+#line 114 "decaf.y"
     {(yyval.node) = mkNode("Stmts", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 114 "decaf.y"
+#line 115 "decaf.y"
     {(yyval.node) = mkNode("Stmts", 2, (yyvsp[(1) - (2)].node), (yyvsp[(2) - (2)].node));;}
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 117 "decaf.y"
+#line 118 "decaf.y"
     {(yyval.node) = mkNode("Stmt", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 118 "decaf.y"
+#line 119 "decaf.y"
     {(yyval.node) = mkNode("Stmt", 1, (yyvsp[(1) - (2)].node));;}
     break;
 
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 119 "decaf.y"
+#line 120 "decaf.y"
     {(yyval.node) = mkNode("Stmt", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 120 "decaf.y"
+#line 121 "decaf.y"
     {(yyval.node) = mkNode("Stmt", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 121 "decaf.y"
+#line 122 "decaf.y"
     {(yyval.node) = mkNode("Stmt", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 122 "decaf.y"
+#line 123 "decaf.y"
     {(yyval.node) = mkNode("Stmt", 1, (yyvsp[(1) - (2)].node));;}
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 123 "decaf.y"
+#line 124 "decaf.y"
     {(yyval.node) = mkNode("Stmt", 1, (yyvsp[(1) - (2)].node));;}
     break;
 
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 124 "decaf.y"
+#line 125 "decaf.y"
     {(yyval.node) = mkNode("Stmt", 1, (yyvsp[(1) - (2)].node));;}
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 125 "decaf.y"
+#line 126 "decaf.y"
     {(yyval.node) = mkNode("Stmt", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 128 "decaf.y"
+#line 129 "decaf.y"
     {(yyval.node) = mkNode("=", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 129 "decaf.y"
+#line 130 "decaf.y"
     {(yyval.node) = mkNode("SimpleStmt", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 132 "decaf.y"
+#line 133 "decaf.y"
     {(yyval.node) = mkNode(".", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 133 "decaf.y"
+#line 134 "decaf.y"
     {(yyval.node) = mkNode("LValue", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 134 "decaf.y"
+#line 135 "decaf.y"
     {(yyval.node) = mkNode("Array", 2, (yyvsp[(1) - (4)].node), (yyvsp[(3) - (4)].node));;}
     break;
 
   case 43:
 
 /* Line 1455 of yacc.c  */
-#line 137 "decaf.y"
+#line 138 "decaf.y"
     {(yyval.node) = mkNode("ClassCall", 3, (yyvsp[(1) - (6)].node), (yyvsp[(3) - (6)].node), (yyvsp[(5) - (6)].node));;}
     break;
 
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 138 "decaf.y"
+#line 139 "decaf.y"
     {(yyval.node) = mkNode("Call", 2, (yyvsp[(1) - (4)].node), (yyvsp[(3) - (4)].node));;}
     break;
 
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 141 "decaf.y"
+#line 142 "decaf.y"
     {(yyval.node) = mkNode("Actuals", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 142 "decaf.y"
+#line 143 "decaf.y"
     {(yyval.node) = mkNode("Actuals", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 143 "decaf.y"
+#line 144 "decaf.y"
     {(yyval.node) = mkLeaf_other(Blank_Leaf);;}
     break;
 
   case 48:
 
 /* Line 1455 of yacc.c  */
-#line 146 "decaf.y"
+#line 147 "decaf.y"
     {(yyval.node) = mkNode("ForStmt", 4, (yyvsp[(3) - (9)].node), (yyvsp[(5) - (9)].node), (yyvsp[(7) - (9)].node), (yyvsp[(9) - (9)].node));;}
     break;
 
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 149 "decaf.y"
+#line 150 "decaf.y"
     {(yyval.node) = mkNode("WhileStmt", 2, (yyvsp[(3) - (5)].node), (yyvsp[(5) - (5)].node));;}
     break;
 
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 152 "decaf.y"
+#line 153 "decaf.y"
     {(yyval.node) = mkNode("IfStmt", 2, (yyvsp[(3) - (5)].node), (yyvsp[(5) - (5)].node));;}
     break;
 
   case 51:
 
 /* Line 1455 of yacc.c  */
-#line 153 "decaf.y"
+#line 154 "decaf.y"
     {(yyval.node) = mkNode("If-else", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 52:
 
 /* Line 1455 of yacc.c  */
-#line 156 "decaf.y"
+#line 157 "decaf.y"
     {(yyval.node) = mkNode("ReturnStmt", 0);;}
     break;
 
   case 53:
 
 /* Line 1455 of yacc.c  */
-#line 157 "decaf.y"
+#line 158 "decaf.y"
     {(yyval.node) = mkNode("ReturnStmt", 1, (yyvsp[(2) - (2)].node));;}
     break;
 
   case 54:
 
 /* Line 1455 of yacc.c  */
-#line 160 "decaf.y"
+#line 161 "decaf.y"
     {(yyval.node) = mkLeaf_other(break_Leaf);;}
     break;
 
   case 55:
 
 /* Line 1455 of yacc.c  */
-#line 163 "decaf.y"
+#line 164 "decaf.y"
     {(yyval.node) = mkNode("PrintStmt", 1, (yyvsp[(3) - (4)].node));;}
     break;
 
   case 56:
 
 /* Line 1455 of yacc.c  */
-#line 166 "decaf.y"
+#line 167 "decaf.y"
     {(yyval.node) = mkNode("Exprs", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 57:
 
 /* Line 1455 of yacc.c  */
-#line 167 "decaf.y"
+#line 168 "decaf.y"
     {(yyval.node) = mkNode("Exprs", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 58:
 
 /* Line 1455 of yacc.c  */
-#line 168 "decaf.y"
+#line 169 "decaf.y"
     {(yyval.node) = mkLeaf_other(Blank_Leaf);;}
     break;
 
   case 59:
 
 /* Line 1455 of yacc.c  */
-#line 171 "decaf.y"
+#line 172 "decaf.y"
     {(yyval.node) = mkNode("Expr", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 60:
 
 /* Line 1455 of yacc.c  */
-#line 174 "decaf.y"
+#line 175 "decaf.y"
     {(yyval.node) = mkNode("Constant", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 61:
 
 /* Line 1455 of yacc.c  */
-#line 175 "decaf.y"
+#line 176 "decaf.y"
     {(yyval.node) = mkNode("Expr", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 62:
 
 /* Line 1455 of yacc.c  */
-#line 176 "decaf.y"
+#line 177 "decaf.y"
     {(yyval.node) = mkLeaf_other(this_Leaf);;}
     break;
 
   case 63:
 
 /* Line 1455 of yacc.c  */
-#line 177 "decaf.y"
+#line 178 "decaf.y"
     {(yyval.node) = mkNode("Expr", 1, (yyvsp[(1) - (1)].node));;}
     break;
 
   case 64:
 
 /* Line 1455 of yacc.c  */
-#line 178 "decaf.y"
+#line 179 "decaf.y"
     {(yyval.node) = mkNode("Expr", 1, (yyvsp[(2) - (3)].node));;}
     break;
 
   case 65:
 
 /* Line 1455 of yacc.c  */
-#line 179 "decaf.y"
+#line 180 "decaf.y"
     {(yyval.node) = mkNode("+", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 66:
 
 /* Line 1455 of yacc.c  */
-#line 180 "decaf.y"
+#line 181 "decaf.y"
     {(yyval.node) = mkNode("-", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 67:
 
 /* Line 1455 of yacc.c  */
-#line 181 "decaf.y"
+#line 182 "decaf.y"
     {(yyval.node) = mkNode("*", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 68:
 
 /* Line 1455 of yacc.c  */
-#line 182 "decaf.y"
+#line 183 "decaf.y"
     {(yyval.node) = mkNode("/", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 69:
 
 /* Line 1455 of yacc.c  */
-#line 183 "decaf.y"
+#line 184 "decaf.y"
     {(yyval.node) = mkNode("%", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 70:
 
 /* Line 1455 of yacc.c  */
-#line 184 "decaf.y"
+#line 185 "decaf.y"
     {(yyval.node) = mkNode("-", 1, (yyvsp[(2) - (2)].node));;}
     break;
 
   case 71:
 
 /* Line 1455 of yacc.c  */
-#line 185 "decaf.y"
+#line 186 "decaf.y"
     {(yyval.node) = mkNode("<", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 72:
 
 /* Line 1455 of yacc.c  */
-#line 186 "decaf.y"
+#line 187 "decaf.y"
     {(yyval.node) = mkNode("<=", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 73:
 
 /* Line 1455 of yacc.c  */
-#line 187 "decaf.y"
+#line 188 "decaf.y"
     {(yyval.node) = mkNode(">", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 74:
 
 /* Line 1455 of yacc.c  */
-#line 188 "decaf.y"
+#line 189 "decaf.y"
     {(yyval.node) = mkNode(">=", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 75:
 
 /* Line 1455 of yacc.c  */
-#line 189 "decaf.y"
+#line 190 "decaf.y"
     {(yyval.node) = mkNode("==", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 76:
 
 /* Line 1455 of yacc.c  */
-#line 190 "decaf.y"
+#line 191 "decaf.y"
     {(yyval.node) = mkNode("!=", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 77:
 
 /* Line 1455 of yacc.c  */
-#line 191 "decaf.y"
+#line 192 "decaf.y"
     {(yyval.node) = mkNode("&&", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 78:
 
 /* Line 1455 of yacc.c  */
-#line 192 "decaf.y"
+#line 193 "decaf.y"
     {(yyval.node) = mkNode("||", 2, (yyvsp[(1) - (3)].node), (yyvsp[(3) - (3)].node));;}
     break;
 
   case 79:
 
 /* Line 1455 of yacc.c  */
-#line 193 "decaf.y"
+#line 194 "decaf.y"
     {(yyval.node) = mkNode("!", 1, (yyvsp[(2) - (2)].node));;}
     break;
 
   case 80:
 
 /* Line 1455 of yacc.c  */
-#line 194 "decaf.y"
+#line 195 "decaf.y"
     {(yyval.node) = mkLeaf_other(syscall_readint);;}
     break;
 
   case 81:
 
 /* Line 1455 of yacc.c  */
-#line 195 "decaf.y"
+#line 196 "decaf.y"
     {(yyval.node) = mkLeaf_other(syscall_readline);;}
     break;
 
   case 82:
 
 /* Line 1455 of yacc.c  */
-#line 196 "decaf.y"
+#line 197 "decaf.y"
     {(yyval.node) = mkNode("new_class", 1, (yyvsp[(2) - (4)].node));;}
     break;
 
   case 83:
 
 /* Line 1455 of yacc.c  */
-#line 197 "decaf.y"
+#line 198 "decaf.y"
     {(yyval.node) = mkNode("new_array", 2, (yyvsp[(2) - (5)].node), (yyvsp[(4) - (5)].node));;}
     break;
 
   case 84:
 
 /* Line 1455 of yacc.c  */
-#line 198 "decaf.y"
+#line 199 "decaf.y"
     {(yyval.node) = mkNode("instanceof", 2, (yyvsp[(3) - (6)].node), (yyvsp[(5) - (6)].node));;}
     break;
 
   case 85:
 
 /* Line 1455 of yacc.c  */
-#line 201 "decaf.y"
+#line 202 "decaf.y"
     {(yyval.node) = mkLeaf_int(yylval.intValue);;}
     break;
 
   case 86:
 
 /* Line 1455 of yacc.c  */
-#line 202 "decaf.y"
+#line 203 "decaf.y"
     {(yyval.node) = mkLeaf_int(yylval.intValue);;}
     break;
 
   case 87:
 
 /* Line 1455 of yacc.c  */
-#line 203 "decaf.y"
+#line 204 "decaf.y"
     {(yyval.node) = mkLeaf_logic(1);;}
     break;
 
   case 88:
 
 /* Line 1455 of yacc.c  */
-#line 204 "decaf.y"
+#line 205 "decaf.y"
     {(yyval.node) = mkLeaf_logic(0);;}
     break;
 
   case 89:
 
 /* Line 1455 of yacc.c  */
-#line 205 "decaf.y"
+#line 206 "decaf.y"
     {(yyval.node) = mkLeaf_string(yylval.stringValue);;}
     break;
 
   case 90:
 
 /* Line 1455 of yacc.c  */
-#line 206 "decaf.y"
+#line 207 "decaf.y"
     {(yyval.node) = mkLeaf_other(NULL_Leaf);;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 2228 "decaf.tab.c"
+#line 2229 "decaf.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2436,7 +2437,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 208 "decaf.y"
+#line 209 "decaf.y"
 
 
 void yyerror(char *s)
@@ -2448,6 +2449,8 @@ int main(void)
 {
 	yyparse();
 	createTableFromASTtree(header);
+	updateTable(header);
+	test(header);
 	return 0;
 }
 

@@ -27,6 +27,7 @@ struct Node *mkLeaf_string(char *value);
 struct Node *mkLeaf_name(char *value);
 struct Node *mkLeaf_other(NodeType type);
 void createTableFromASTtree(struct Node *header);
+void updateTable(struct Node *header);
 void printAST(struct Node *head);
 extern unsigned int strlen(char *s);
 extern char *strcpy(char* dest, const char *src);

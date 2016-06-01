@@ -6,6 +6,7 @@
 	#include "include/SymbolTree.h"
 	int yylex(void);
 	void yyerror(char *);
+	void test(struct Node *header);
 	struct Node *header;
 %}
 
@@ -216,6 +217,8 @@ int main(void)
 {
 	yyparse();
 	createTableFromASTtree(header);
+	updateTable(header);
+	test(header);
 	return 0;
 }
 
